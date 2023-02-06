@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Attendance</string>
+    <string name="StatusText">Status;</string>
+    <string name="DisplayDate">Display Date</string>
+    <string name="btnStartShiftText">Start Shift</string>
+    <string name="btnEndShiftText">End Shift</string>
+    <string name="btnActiveTime">Update Active Time</string>
+    <string name="HalfPast">00:30</string>
+</resources>
