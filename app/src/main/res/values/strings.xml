@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Attendance</string>
+    <string name="app_name">Attendance Program - Andrew Warnock</string>
     <string name="StatusText">Status;</string>
     <string name="DisplayDate">Display Date</string>
     <string name="btnStartShiftText">Start Shift</string>

@@ -3,14 +3,15 @@ package com.werdna.attendance
 import java.time.LocalDateTime
 
 class Attendance {
-    private var id              : Int = 1
-    private var dateToday       : LocalDateTime
+    private var id              : Int = 0 //Idea could be combination of the date's day, month, year
+    private var dateToday       : LocalDateTime //Used to get date
     private var timeStart       : String = "00:00"
     private var timeEnd         : String = "00:00"
     private var isWorking       : Boolean
     private var activeTime      : Double = 0.0
     private var isHalfPastStart : Boolean = false;
     private var isHalfPastEnd   : Boolean = false;
+    //Todo: to add break time to be trackable. and deducted from active time
 
     constructor(idInsert : Int, timeStartInsert : String, timeEndInsert : String,
                 dateTimeInsert : LocalDateTime, isWorkingInsert : Boolean,
@@ -37,6 +38,8 @@ class Attendance {
     {
         var display = "";
         var dayOfWeek : String = dateToday.dayOfWeek.toString()
+
+        //Goes through each possible date, and the impossible 32, to set the text for something different
         display += when(this.dateToday.dayOfMonth)
         {
             1 -> "1st"
@@ -92,7 +95,8 @@ class Attendance {
     fun setStartTime()
     {
         this.isWorking  = true
-        val datetmp : LocalDateTime = LocalDateTime.now()
+        //Todo: Consider using global variable today, note: could cause issues if user works night shift when the date goes over
+        val datetmp : LocalDateTime = LocalDateTime.now() //creates local variable time to get today's time
         this.timeStart = datetmp.hour.toString()
         if(isHalfPastStart) {   this.timeStart += ":30" }
         else                {   this.timeStart += ":00" }
@@ -115,9 +119,14 @@ class Attendance {
 
     private fun setActiveTime()
     {
+        //Converts both to double for easier maths, stored as text for easy display
         val start : Double = this.timeStart.substring(0, this.timeStart.length - 3).toDouble()
         val end : Double = this.timeEnd.substring(0, this.timeStart.length - 3).toDouble()
+
+
         this.activeTime = 0.0
+
+        //Goes through each combination of the start and finish as to not go over
         if((this.isHalfPastStart && !this.isHalfPastEnd)
             ||
             (!this.isHalfPastStart && this.isHalfPastEnd))
